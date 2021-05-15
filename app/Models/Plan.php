@@ -23,6 +23,11 @@ class Plan extends Model
         return $this->belongsToMany(Profile::class);
     }
 
+    public function tenants()
+    {
+        return $this->hasMany(Tenant::class);
+    }
+
     public function search($filter = null)
     {
         return $this
@@ -33,7 +38,7 @@ class Plan extends Model
 
     public function profilesAvailable($filter = null)
     {
-        $profiles = Profile::whereNotIn('profiles.id', function($query) {
+        $profiles = Profile::whereNotIn('profiles.id', function ($query) {
             $query->select('plan_profile.profile_id');
             $query->from('plan_profile');
             $query->whereRaw("plan_profile.plan_id={$this->id}");

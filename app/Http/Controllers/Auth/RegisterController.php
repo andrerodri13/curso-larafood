@@ -44,7 +44,7 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
@@ -53,21 +53,32 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'cnpj' => ['required', 'unique:tenants'],
+            'empresa' => ['required', 'unique:tenants,name'],
         ]);
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\User
-     */
+
     protected function create(array $data)
     {
-        return User::create([
+        if (!$plan = session('plan')) {
+            return redirect()->route('site.home');
+        }
+
+        $tenant = $plan->tenants()->create([
+            'cnpj' => $data['cnpj'],
+            'name' => $data['empresa'],
+            'url' => \Str::slug($data['empresa'], '-'),
+            'email' => $data['email'],
+
+            'subscription' => now(),
+            'expires_at' => now()->addDays(7),
+        ]);
+
+        return $tenant->users()->create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'password' => bcrypt($data['password'])
         ]);
     }
 }
