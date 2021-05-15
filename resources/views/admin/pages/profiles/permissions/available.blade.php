@@ -18,7 +18,7 @@
             <form action="{{ route('profiles.permissions.available', $profile->id) }}" method="POST" class="form form-inline">
                 @csrf
                 <input type="text" name="filter" placeholder="Filtro" class="form-control" value="{{ $filters['filter'] ?? '' }}">
-                <button type="submit" class="btn btn-dark">Filtrar</button>
+                <button type="submit" class="btn btn-dark"><i class="fas fa-search"></i></button>
             </form>
         </div>
         <div class="card-body">
