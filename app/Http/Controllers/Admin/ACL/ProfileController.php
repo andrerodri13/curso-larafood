@@ -14,7 +14,7 @@ class ProfileController extends Controller
     public function __construct(Profile $profile)
     {
         $this->repository = $profile;
-
+        $this->middleware('can:profiles');
     }
 
     public function index()
@@ -81,7 +81,7 @@ class ProfileController extends Controller
         $filters = $request->only('filter');
 
         $profiles = $this->repository
-            ->where(function($query) use ($request) {
+            ->where(function ($query) use ($request) {
                 if ($request->filter) {
                     $query->where('name', $request->filter);
                     $query->orWhere('description', 'LIKE', "%{$request->filter}%");

@@ -20,6 +20,7 @@ class CategoryController extends Controller
     public function __construct(Category $category)
     {
         $this->repository = $category;
+        $this->middleware('can:categories');
     }
 
     public function index()
@@ -76,7 +77,7 @@ class CategoryController extends Controller
         return redirect()->route('categories.index');
     }
 
-   
+
     public function destroy($id)
     {
         if (!$category = $this->repository->find($id)) {
