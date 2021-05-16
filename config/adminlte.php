@@ -227,18 +227,23 @@ return [
 
         [
             'text' => 'Planos',
-            'url'  => 'admin/plans',
-            'icon' =>  'fas fa-list-alt'
+            'url' => 'admin/plans',
+            'icon' => 'fas fa-list-alt'
         ],
         [
             'text' => 'Perfis',
-            'url'  => 'admin/profiles',
-            'icon' =>  'fas fa-address-book'
+            'url' => 'admin/profiles',
+            'icon' => 'fas fa-address-book'
         ],
         [
             'text' => 'Permissões',
             'url' => 'admin/permissions',
             'icon' => 'fas fa-lock'
+        ],
+        [
+            'text' => 'Usuários',
+            'url' => 'admin/users',
+            'icon' => 'fas fa-users'
         ],
 
     ],
