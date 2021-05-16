@@ -8,6 +8,7 @@ class Tenant extends Model
 {
     protected $fillable = [
         'plan_id',
+        'uuid',
         'cnpj',
         'name',
         'url',

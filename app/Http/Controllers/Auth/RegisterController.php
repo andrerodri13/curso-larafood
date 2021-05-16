@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use App\Services\TenantService;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -53,8 +54,8 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'cnpj' => ['required', 'unique:tenants'],
-            'empresa' => ['required', 'unique:tenants,name'],
+            'cnpj' => ['required', 'min:14', 'max:14', 'unique:tenants'],
+            'empresa' => ['required', 'string', 'min:3', 'max:255', 'unique:tenants,name'],
         ]);
     }
 
@@ -65,20 +66,8 @@ class RegisterController extends Controller
             return redirect()->route('site.home');
         }
 
-        $tenant = $plan->tenants()->create([
-            'cnpj' => $data['cnpj'],
-            'name' => $data['empresa'],
-            'url' => \Str::slug($data['empresa'], '-'),
-            'email' => $data['email'],
+        $tenantService = app(TenantService::class);
+        return $tenantService->make($plan, $data);
 
-            'subscription' => now(),
-            'expires_at' => now()->addDays(7),
-        ]);
-
-        return $tenant->users()->create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password'])
-        ]);
     }
 }
