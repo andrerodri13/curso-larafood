@@ -13,6 +13,20 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group([
+    'prefix' => 'v1',
+    'namespace' => 'Api'
+], function () {
+    Route::get('/tenants/{uuid}', 'TenantController@show');
+    Route::get('/tenants', 'TenantController@index');
+
+    Route::get('/categories/{url}', 'CategoryController@show');
+    Route::get('/categories', 'CategoryController@categoriesByTenant');
+
+    Route::get('/tables/{identify}', 'TableController@show');
+    Route::get('/tables', 'TableController@tablesByTenant');
+
+    Route::get('/products/{flag}', 'ProductController@show');
+    Route::get('/products', 'ProductController@productByTenant');
 });
+
