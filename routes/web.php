@@ -1,5 +1,10 @@
 <?php
+Route::get('teste', function () {
+   $client = \App\Models\Client::find(1);
 
+   $token = $client->createToken('token-teste');
+   dd($token->plainTextToken);
+});
 /*
 |--------------------------------------------------------------------------
 | Web Routes

@@ -17,6 +17,13 @@ Route::group([
     'prefix' => 'v1',
     'namespace' => 'Api'
 ], function () {
+    Route::post('/sanctum/token', 'Auth\AuthClientController@auth');
+
+    Route::group(['middleware' => 'auth:sanctum'], function () {
+        Route::get('/auth/me', 'Auth\AuthClientController@me');
+        Route::post('/auth/logout', 'Auth\AuthClientController@logout');
+    });
+
     Route::get('/tenants/{uuid}', 'TenantController@show');
     Route::get('/tenants', 'TenantController@index');
 
@@ -28,5 +35,10 @@ Route::group([
 
     Route::get('/products/{flag}', 'ProductController@show');
     Route::get('/products', 'ProductController@productByTenant');
+
+
+    Route::post('/client', 'Auth\RegisterController@store');
+
+
 });
 
