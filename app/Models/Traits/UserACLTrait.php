@@ -13,6 +13,7 @@ trait UserACLTrait
         $permissionsPlan = $this->permissionsPlan();
         $permissionsRoles = $this->permissionsRole();
 
+
         $permissions = [];
 
         foreach ($permissionsRoles as $permission) {

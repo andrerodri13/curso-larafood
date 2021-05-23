@@ -16,6 +16,7 @@ class ProductObserver
     public function creating(Product $product)
     {
         $product->flag = Str::slug($product->title, '-');
+        $product->uuid = Str::uuid();
 
     }
 
@@ -28,38 +29,5 @@ class ProductObserver
     public function updating(Product $product)
     {
         $product->flag = Str::slug($product->title, '-');
-    }
-
-    /**
-     * Handle the product "deleted" event.
-     *
-     * @param  \App\Models\Product  $product
-     * @return void
-     */
-    public function deleted(Product $product)
-    {
-        //
-    }
-
-    /**
-     * Handle the product "restored" event.
-     *
-     * @param  \App\Models\Product  $product
-     * @return void
-     */
-    public function restored(Product $product)
-    {
-        //
-    }
-
-    /**
-     * Handle the product "force deleted" event.
-     *
-     * @param  \App\Models\Product  $product
-     * @return void
-     */
-    public function forceDeleted(Product $product)
-    {
-        //
     }
 }

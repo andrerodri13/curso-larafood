@@ -22,6 +22,12 @@ Route::group([
     Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::get('/auth/me', 'Auth\AuthClientController@me');
         Route::post('/auth/logout', 'Auth\AuthClientController@logout');
+
+        Route::post('auth/orders/{identifyOrder}/evaluations', 'EvaluationController@store');
+
+
+        Route::get('auth/my-orders', 'OrderController@myOrders');
+        Route::post('auth/orders', 'OrderController@store');
     });
 
     Route::get('/tenants/{uuid}', 'TenantController@show');
@@ -33,12 +39,13 @@ Route::group([
     Route::get('/tables/{identify}', 'TableController@show');
     Route::get('/tables', 'TableController@tablesByTenant');
 
-    Route::get('/products/{flag}', 'ProductController@show');
+    Route::get('/products/{identify}', 'ProductController@show');
     Route::get('/products', 'ProductController@productByTenant');
-
 
     Route::post('/client', 'Auth\RegisterController@store');
 
+    Route::post('/orders', 'OrderController@store');
+    Route::get('/orders/{identify}', 'OrderController@show');
 
 });
 
