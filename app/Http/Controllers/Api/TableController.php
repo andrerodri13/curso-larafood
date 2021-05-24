@@ -24,14 +24,13 @@ class TableController extends Controller
 
     public function tablesByTenant(TenantFormRequest $request)
     {
-        $tables = $this->tableService->getTableByUuid($request->token_company);
+        $tables = $this->tableService->getTablesByUuid($request->token_company);
         return TableResource::collection($tables);
     }
 
     public function show(TenantFormRequest $request, $identify)
     {
-
-        if (!$table = $this->tableService->getTableByIdentify($identify)) {
+        if (!$table = $this->tableService->getTableByUuid($identify)) {
             return response()->json(['message' => 'Table Not Found'], 404);
         }
 

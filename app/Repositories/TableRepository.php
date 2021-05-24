@@ -28,15 +28,11 @@ class TableRepository implements TableRepositoryInterface
             ->get();
     }
 
-    public function getTableByTenantId(int $idTenant)
+    public function getTablesByTenantId(int $idTenant)
     {
-        return DB::table($this->table)->where('tenant_id', $idTenant)->get();
-    }
-
-    public function getTableByIdentify(string $identify)
-    {
-        return DB::table($this->table)->where('identify', $identify)->first();
-
+        return DB::table($this->table)
+            ->where('tenant_id', $idTenant)
+            ->get();
     }
 
     public function getTableByUuid(string $uuid)

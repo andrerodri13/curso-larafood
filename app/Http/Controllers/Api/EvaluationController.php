@@ -27,6 +27,8 @@ class EvaluationController extends Controller
     {
         $evaluation = $request->only('stars', 'comment');
         $evaluation = $this->evaluationService->createNewEvaluation($request->identifyOrder, $evaluation);
-        return new EvaluationResource($evaluation);
+        return (new EvaluationResource($evaluation))
+            ->response()
+            ->setStatusCode(201);
     }
 }
