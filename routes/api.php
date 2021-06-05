@@ -12,13 +12,16 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::get('/', function () {
+    return response()->json(['message' => 'OK']);
+});
 
 Route::group([
     'prefix' => 'v1',
     'namespace' => 'Api'
 ], function () {
     Route::post('/auth/register', 'Auth\RegisterController@store');
-        Route::post('/auth/token', 'Auth\AuthClientController@auth');
+    Route::post('/auth/token', 'Auth\AuthClientController@auth');
 
     Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::get('/auth/me', 'Auth\AuthClientController@me');
