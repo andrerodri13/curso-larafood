@@ -35,7 +35,7 @@
                             <td>{{ $table->identify }}</td>
                             <td>{{ $table->description }}</td>
                             <td style="width:10px;">
-                                <a href="#{{--{{ route('tables.qrcode', $table->identify) }}--}}" class="btn btn-default" target="_blank">
+                                <a href="{{ route('tables.qrcode', $table->identify)}}" class="btn btn-default" target="_blank">
                                     <i class="fas fa-qrcode"></i>
                                 </a>
                                 <a href="{{ route('tables.edit', $table->id) }}" class="btn btn-info"><i class="fas fa-pen-alt"></i></a>
