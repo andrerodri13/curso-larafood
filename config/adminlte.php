@@ -225,6 +225,11 @@ return [
 
     'menu' => [
         [
+            'text' => 'Home',
+            'url'  => 'admin',
+            'icon' => 'fas fa-tachometer-alt',
+        ],
+        [
             'text' => 'Empresas',
             'url'  => 'admin/tenants',
             'icon' => 'fas fa-building',
