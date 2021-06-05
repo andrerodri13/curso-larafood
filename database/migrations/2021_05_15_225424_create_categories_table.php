@@ -17,8 +17,8 @@ class CreateCategoriesTable extends Migration
             $table->bigIncrements('id');
             $table->uuid('uuid');
             $table->unsignedBigInteger('tenant_id');
-            $table->string('name')->unique();
-            $table->string('url')->unique();
+            $table->string('name');
+            $table->string('url');
             $table->string('description');
 
             $table->timestamps();
