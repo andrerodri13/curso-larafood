@@ -66,7 +66,7 @@ class CategoryController extends Controller
     }
 
 
-    public function update(Request $request, $id)
+    public function update(StoreUpdateCategoryRequest $request, $id)
     {
         if (!$category = $this->repository->find($id)) {
             return redirect()->back();
