@@ -14,6 +14,7 @@ use App\Observers\PlanObserver;
 use App\Observers\ProductObserver;
 use App\Observers\TableObserver;
 use App\Observers\TenantObserver;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -50,5 +51,8 @@ class AppServiceProvider extends ServiceProvider
 
             return $user->isAdmin();
         });
+
+
+        Paginator::useBootstrap();
     }
 }
